@@ -1,0 +1,76 @@
+package EmployeeData;
+
+import java.io.*;
+
+public class EmployeeFileReader 
+{
+	/**
+	 * 
+	 * @param employeeID
+	 * @return
+	 */
+	public String GetEmployeeData(String employeeID)
+	{
+		
+		String employeeData = null;
+		/**
+		 *In this class File gets to be read and checked whether Employee ID exists or not. 
+		 */
+		
+		File file = new File("Data\\employeedata.txt");
+		 
+		if(file.exists())
+		{	
+		
+			try	
+			{
+					FileReader fileReader = new FileReader(file);
+					
+					BufferedReader bufferedReader = new BufferedReader(fileReader);
+					
+					String line;
+					String empLine;
+					String empID ;
+					String[] result = new String[4];
+					String[] resultEmp = new String[4];
+				
+				
+					while ((line = bufferedReader.readLine()) != null) 
+					{
+						result = line.split("\\s+");
+						empLine = result[0].toString();
+						
+						resultEmp = empLine.split("\\|");
+						empID = resultEmp[0].toString();
+						
+						
+						if(employeeID.equals(empID))
+						{
+							employeeData = empLine;
+							
+						}
+						
+					}
+						fileReader.close();
+
+			}
+			
+			catch (IOException e) 
+			{
+				e.printStackTrace();
+				employeeData = null;
+			}
+			
+		}	
+		else
+			{
+				employeeData = null;	
+			}
+			
+		
+		return employeeData;
+	}
+		
+}
+
+
