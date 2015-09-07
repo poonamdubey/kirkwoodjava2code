@@ -1,0 +1,6 @@
+456789|Weasel|Mark|Legal2015-07-26   01:33 AM
+123456|Smith|John|Sales2015-07-26   01:34 AM
+123456|Smith|John|Sales|2015-07-26   01:34 AM
+456789|Weasel|Mark|Legal|2015-07-26   01:34 AM
+123456|Smith|John|Sales|2015-07-29   09:07 PM
+123456|Smith|John|Sales|2015-09-02   23:00 PM
