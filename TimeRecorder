@@ -1,0 +1,84 @@
+package EmployeeData;
+
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+public class TimeRecorder
+{
+	
+	public static boolean recordEmploeeTime(String employee)
+	{
+		
+		return appendRecord(employee);
+		
+	}
+	
+	/**
+	 * append employee time with data
+	 * @param employee
+	 * @return
+	 */
+	 private static boolean appendRecord(String employee)
+	{
+			
+		 boolean isRecordAppended = false;
+			
+			BufferedWriter bw = null;
+			 String filename= "Data\\punchcardrecords.txt";
+            
+			 File f = new File(filename);
+			if(f.exists())
+			{	 
+			 try 
+			 {
+			    bw = new BufferedWriter(new FileWriter(filename, true));
+			    bw.newLine();
+			    
+			    bw.write(employee + "|" + getCurrentTime());
+			    
+			    bw.flush();
+			    bw.close();
+			    isRecordAppended = true;  	
+			    
+			 } 
+			
+			 catch (IOException ioe) 
+			 {
+				 ioe.printStackTrace();
+				 isRecordAppended = false;
+			 }	
+			}
+			else
+			{
+				System.out.println("Punchcard Records File not found  !!");
+				isRecordAppended = false;
+			}
+			
+			return isRecordAppended;
+		}
+	 
+	 
+	 
+	 /**
+	  *  get current time
+	  * @return
+	  */
+	  
+	 private static String getCurrentTime()
+	 {
+		 DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd   HH:mm a");
+		  
+		   Date date = new Date();
+		   return dateFormat.format(date).toString();
+		   
+		   
+	 }
+	 
+	 
+
+}
