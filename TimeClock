@@ -1,0 +1,78 @@
+package EmployeeData;
+
+import java.util.Scanner;
+
+public class TimeClock 
+{
+
+	public static void main(String[] args) 
+	{
+		String employeeID;
+		String employeeData = null;
+	
+		Scanner scan = new Scanner(System.in);
+		
+		
+		/**
+		 *  Take the user input
+		 */
+				
+		System.out.print("Enter your Employee ID: ");
+		employeeID = scan.nextLine();
+		 
+		/**
+		 * In put validation check.
+		 */
+		if (employeeID.equals(""))
+		{
+			System.out.println("Please enter valid Employee ID:");
+		
+		}
+		
+		else if (employeeID.length() != 6)
+		 {
+			 System.out.println("Please enter your correct Employee ID in 6 digits: ");
+			 
+		 }
+		
+		/**
+		 * Send the information to EmployeeFileReader to get the Employee ID checked. 
+		 */
+		
+		 else
+		 {
+			  EmployeeFileReader isEmp = new EmployeeFileReader(); 
+			 
+			  employeeData = isEmp.GetEmployeeData(employeeID);
+			
+			 /**
+			  * If Employee ID exist Time and Date is being updated by sending information to TimeRecorder.
+			  */
+			  	if (employeeData != null)
+					{
+			  			
+			  			if(TimeRecorder.recordEmploeeTime(employeeData))
+			  			{
+			  			
+			  				System.out.println("Employee Punch Time Record information has been updated.");
+			  			}
+			  			else
+			  			{
+			  				System.out.println("Employee information not updated. try again");	
+			  			}
+			  			
+			  		}
+			  	else
+			  		{
+			  			System.out.println("Employee Data/File  not found, please enter the correct employee ID and try again.");
+			  		}	
+			
+		 }
+		
+		scan.close();
+		 
+		
+	}
+	
+		
+}
